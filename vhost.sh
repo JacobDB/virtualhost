@@ -80,8 +80,8 @@ if [ "$action" == 'create' ]
         if ! echo "<VirtualHost *:80>
     ServerAdmin $email
     ServerName $domain
-    ServerAlias $domain
-    DocumentRoot www.$rootDir
+    ServerAlias www.$domain
+    DocumentRoot $rootDir
     <Directory />
         AllowOverride All
     </Directory>
