@@ -67,7 +67,7 @@ if [ "$action" == 'create' ]
             ### give permissions to the directory
             chmod 755 $rootDir/public_html
             ### write a test file to the directory
-            if ! echo "<?php echo phpinfo(); ?>" > $rootDir/phpinfo.php
+            if ! echo "<?php echo phpinfo(); ?>" > $rootDir/public_html/phpinfo.php
             then
                 echo $"ERROR: Not able to write in file $rootDir/public_html/phpinfo.php. Please check permissions"
                 exit;
