@@ -51,19 +51,27 @@ if [ "$action" == 'create' ]
             exit;
         fi
 
-        ### check if directory exists or not
+        ### check if $rootDir exists
         if ! [ -d $rootDir ]; then
             ### create the directory
             mkdir $rootDir
-            ### give permission to root dir
+            ### give permissions to the directory
             chmod 755 $rootDir
-            ### write test file in the new domain dir
+        fi
+
+        ### check if $rootDir/public_html exists
+        if ! [ -d $rootDir/public_html ]; then
+            ### create the directory
+            mkdir $rootDir/public_html
+            ### give permissions to the directory
+            chmod 755 $rootDir/public_html
+            ### write a test file to the directory
             if ! echo "<?php echo phpinfo(); ?>" > $rootDir/phpinfo.php
             then
-                echo $"ERROR: Not able to write in file $rootDir/phpinfo.php. Please check permissions"
+                echo $"ERROR: Not able to write in file $rootDir/public_html/phpinfo.php. Please check permissions"
                 exit;
             else
-                echo $"Added content to $rootDir/phpinfo.php"
+                echo $"Added content to $rootDir/public_html/phpinfo.php"
             fi
         fi
 
@@ -76,7 +84,7 @@ if [ "$action" == 'create' ]
     <Directory />
         AllowOverride All
     </Directory>
-    <Directory $rootDir>
+    <Directory $rootDir/public_html>
         Options FollowSymLinks MultiViews
         AllowOverride all
         Require all granted
