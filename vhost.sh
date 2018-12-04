@@ -34,7 +34,7 @@ do
 done
 
 if [ "$rootDir" == "" ]; then
-    rootDir=${domain//./}
+    rootDir=$domain
 fi
 
 ### if root dir starts with '/', don't use /var/www as default starting point
@@ -102,7 +102,7 @@ if [ "$action" == 'create' ]
         fi
 
         ### Add domain in /etc/hosts
-        if ! echo "127.0.0.1    $domain" >> /etc/hosts
+        if ! echo "127.0.0.1    $domain www.$domain" >> /etc/hosts
         then
             echo $"ERROR: Not able to write in /etc/hosts"
             exit;
@@ -113,7 +113,7 @@ if [ "$action" == 'create' ]
         ### Add domain in /mnt/c/Windows/System32/drivers/etc/hosts (Windows Subsytem for Linux)
         if [ -e /mnt/c/Windows/System32/drivers/etc/hosts ]
         then
-            if ! echo -e "\r\n127.0.0.1    $domain" >> /mnt/c/Windows/System32/drivers/etc/hosts
+            if ! echo -e "\r\n127.0.0.1    $domain www.$domain" >> /mnt/c/Windows/System32/drivers/etc/hosts
             then
                 echo $"ERROR: Not able to write in /mnt/c/Windows/System32/drivers/etc/hosts (Hint: Try running Bash as administrator)"
             else
